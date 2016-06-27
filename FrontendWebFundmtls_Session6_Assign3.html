@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Max Sequence Finder</title>
+	<meta charset="utf-8">
+
+		<style type="text/css">
+	
+		.row{
+			display: inline-block;
+		}
+
+		.lblMain{
+			margin-right: 7px;
+		}
+
+	</style>
+</head>
+<body>
+	<br>
+	<h3>Max Sequence finder</h3>
+
+	<label class="lblMain">Array is : [3, 2, 3, 4, 2, 2, 4]</label>
+	<input type="button" name="btnminmax" value="Find Sequence" onclick="findMaxSequence(arrNumbers1,1)">
+	<br>
+	<div class="row">
+		<label class="label" id="lblSeq1"></label>
+	</div>
+	<br><br><br>
+
+	<label class="lblMain">Array is : [3, 5, 4, 6, 1, 2, 3, 6, 10, 32]</label>
+	<input type="button" name="btnminmax" value="Find Sequence" onclick="findMaxSequence(arrNumbers2,2)">
+	<br>
+	<div class="row">
+		<label class="label" id="lblSeq2"></label>
+	</div>
+	<br><br><br>
+
+	<label class="lblMain">Array is : [3, 2, 1]</label>
+	<input type="button" name="btnminmax" value="Find Sequence" onclick="findMaxSequence(arrNumbers3,3)">
+	<br>
+	<div class="row">
+		<label class="label" id="lblSeq3"></label>
+	</div>
+	<br><br><br>
+
+
+	<script type="text/javascript">
+			var arrNumbers1 = [3, 2, 3, 4, 2, 2, 4];
+			var arrNumbers2= [3, 5, 4, 6, 1, 2, 3, 6, 10, 32];
+			var arrNumbers3 = [3,2,1];
+
+
+		function findMaxSequence(arrNumbers, lblNum){
+
+			var	arrList = arrNumbers;
+			var Seq = [];
+			var prevNum;
+
+
+			for (i=0; i<=arrList.length; i++){
+
+				var CurNUm = arrList[i];
+
+				if (i==0){
+					Seq.push(CurNUm.toString());
+				}else if (i==1){
+					
+						var prevNum = arrList[i-1];
+				} 
+
+
+				if ( CurNUm < prevNum ) {
+						if(Seq.length <= 1){
+							Seq=[];
+							Seq.push(CurNUm.toString());
+							prevNum = CurNUm;
+						}else if (Seq.length >=2){
+
+							if(CurNUm < arrList[i+1] && arrList[i+1] < arrList[i+2] ){
+								Seq=[];
+								Seq.push(CurNUm.toString());
+								prevNum = CurNUm;
+							}
+						}
+
+				}else if ( CurNUm > prevNum ){
+					 Seq.push(CurNUm.toString());
+					 prevNum = CurNUm;
+				}else {
+					prevNum = CurNUm;
+				}
+
+			}
+			if (Seq.length >2){
+				
+				if (lblNum==1) {
+					document.getElementById('lblSeq1').innerHTML = "Sequence is : [" + Seq + "]";
+				}else if (lblNum==2){
+					document.getElementById('lblSeq2').innerHTML = "Sequence is : [" + Seq + "]";
+				}else if (lblNum==3) {
+					document.getElementById('lblSeq3').innerHTML = "Sequence is : [" + Seq + "]";
+				}
+				// return "Sequence is : [" + Seq + "]";
+			}else{
+				if (lblNum==1) {
+					document.getElementById('lblSeq1').innerHTML = "No Sequence Found!";
+				}else if (lblNum==2){
+					document.getElementById('lblSeq2').innerHTML = "No Sequence Found!";
+				}else if (lblNum==3) {
+					document.getElementById('lblSeq3').innerHTML = "No Sequence Found!";
+				}
+				// return = "No Sequence Found!";
+			}
+		}
+
+	</script>
+
+</body>
+</html>
